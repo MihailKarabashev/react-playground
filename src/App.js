@@ -1,14 +1,16 @@
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Main from './components/Main';
+import ToDoList from './components/ToDoList';
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Main />
-      <Footer />
+      <header>
+        <h1>ToDo App</h1>
+      </header>
+      <ToDoList />
+      <footer>
+        <p>All rights reserved &copy;</p>
+      </footer>
     </div>
   );
 }
