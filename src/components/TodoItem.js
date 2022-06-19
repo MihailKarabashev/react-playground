@@ -1,7 +1,17 @@
 export default function TodoItem({
-    todo
+    id,
+    todo,
+    onDelete,
+    onClick
 }) {
     return (
-        <li>{todo.text}</li>
+        <li onClick={() => onClick(id)}>
+            {todo.text}
+            <button onClick={() => onDelete(id)}>
+                x
+            </button>
+        </li>
+
+        // <li>{todo.text} <button onClick={onDelete}>x</button></li>
     );
 }

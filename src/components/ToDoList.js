@@ -4,9 +4,9 @@ import TodoItem from "./TodoItem";
 export default function TodoList() {
 
     let [todos, setTodos] = useState([
-        { id: 1, text: 'Clean my room' },
-        { id: 2, text: 'Wash the dishes' },
-        { id: 3, text: 'Go to the gym' }
+        { id: 1, text: 'Clean my room', isDone: false },
+        { id: 2, text: 'Wash the dishes', isDone: false },
+        { id: 3, text: 'Go to the gym', isDone: false }
     ]);
 
     useEffect(() => {
@@ -16,7 +16,8 @@ export default function TodoList() {
     const onTodoInputBlue = (e) => {
         let todo = {
             id: todos.length + 1,
-            text: e.target.value
+            text: e.target.value,
+            isDone: false
         };
 
         setTodos(oldState => [
@@ -27,12 +28,29 @@ export default function TodoList() {
         e.target.value = '';
     };
 
+    const deleteTodoItemClickHandler = (id) => {
+        setTodos(oldTodos => oldTodos.filter(x => x.id != id));
+    };
+
+    const toggleTodoItemClickHandler = (id) => {
+
+    };
+
 
     return (
         <>
             <input onBlur={onTodoInputBlue} type="text" name="todo" />
             <ul>
-                {todos.map(todo => <TodoItem key={todo.id} todo={todo} />)}
+                {todos.map(todo =>
+                    <TodoItem
+                        key={todo.id}
+                        todo={todo}
+                        id={todo.id}
+                        onDelete={deleteTodoItemClickHandler}
+                        onClick={toggleTodoItemClickHandler}
+                    />
+                )}
+                {/* {todos.map(todo => <TodoItem key={todo.id} todo={todo} id={todo.id} onDelete={() => deleteTodoItemClickHandler(todo.id)} />)} */}
             </ul>
         </>
     );
