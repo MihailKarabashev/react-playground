@@ -3,9 +3,7 @@ import * as gameService from '././services/gameService';
 
 import LatestGameCard from "./LatestGameCard";
 
-const WelcomeWorld = ({
-    navigationChangeHandler
-}) => {
+const WelcomeWorld = () => {
     const [latestGames, setLatestGames] = useState([]);
 
     useEffect(() => {
@@ -14,9 +12,6 @@ const WelcomeWorld = ({
                 setLatestGames(res);
             });
     }, []);
-
-
-
 
     return (
         <section id="welcome-world">
@@ -34,7 +29,7 @@ const WelcomeWorld = ({
                         <LatestGameCard
                             key={game._id}
                             game={game}
-                            navigationChangeHandler={navigationChangeHandler} />)
+                        />)
                     : <p className="no-articles">No games yet</p>
                 }
 
