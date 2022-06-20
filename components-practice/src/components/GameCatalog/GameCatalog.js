@@ -15,10 +15,6 @@ const GameCatalog = ({
 
     }, []);
 
-    const gameDetailsHandler = (id) => {
-        console.log(id);
-    };
-
     return (
         <section id="catalog-page">
             <h1>All Games</h1>
