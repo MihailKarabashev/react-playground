@@ -5,6 +5,12 @@ const getAll = () => {
         .then(res => res.json());
 }
 
+const getOne = (petId) => {
+    return fetch(baseURl + '/pets/' + petId)
+        .then(res => res.json());
+}
+
 export {
-    getAll
+    getAll,
+    getOne
 }
