@@ -10,8 +10,8 @@ import MyPets from './components/MyPets';
 import Create from './components/Create';
 
 function App() {
-  const [userInfo, setUserInfo] = useState({isAuthenticated: false, username: ''});
-  
+  const [userInfo, setUserInfo] = useState({ isAuthenticated: false, username: '' });
+
   useEffect(() => {
     let user = authService.getUser();
 
@@ -31,21 +31,21 @@ function App() {
 
   return (
     <div id="container">
-        <Header {...userInfo} />
+      <Header {...userInfo} />
 
-        <main id="site-content">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/login" element={<Login onLogin={onLogin} />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/my-pets" element={<MyPets />} />
-            <Route path="/create" element={<Create />} />
-          </Routes>
-        </main>
+      <main id="site-content">
+        <Routes>
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/login" element={<Login onLogin={onLogin} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/my-pets" element={<MyPets />} />
+          <Route path="/create" element={<Create />} />
+        </Routes>
+      </main>
 
-        <footer id="site-footer">
-            <p>@PetMyPet</p>
-        </footer>
+      <footer id="site-footer">
+        <p>@PetMyPet</p>
+      </footer>
     </div>
   );
 }
