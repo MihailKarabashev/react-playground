@@ -13,12 +13,18 @@ const Login = ({
         let formData = new FormData(e.currentTarget);
 
         let email = formData.get('email');
+        let password = formData.get('password');
 
-        authService.login(email);
-        
-        onLogin(email);
+        authService.login({ email, password })
+            .then(res => {
+                onLogin(res);
+                navigate('/dashboard');
 
-        navigate('/');
+            }).catch(err => {
+
+            });
+
+
     }
 
     return (
