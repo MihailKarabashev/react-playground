@@ -1,7 +1,33 @@
+import { useContext } from 'react';
+import { create } from '../../services/petService';
+import { useNavigate } from 'react-router-dom';
+
+import { AuthContext } from '../../contexts/AuthContext';
+
 const Create = () => {
+    const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+
+    const onPetCreate = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+
+        let name = formData.get('name');
+        let description = formData.get('description');
+        let imageUrl = formData.get('imageUrl');
+        let type = formData.get('type');
+
+        let object = { name, description, imageUrl, type };
+
+        create(object, user.accessToken)
+            .then(result => {
+                navigate('/dashboard');
+            })
+    };
     return (
         <section id="create-page" className="create">
-            <form id="create-form" action="" method="">
+            <form id="create-form" method="POST" onSubmit={onPetCreate}>
                 <fieldset>
                     <legend>Add new Pet</legend>
                     <p className="field">

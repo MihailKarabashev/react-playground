@@ -1,4 +1,4 @@
-const baseURl = 'http://localhost:3030/jsonstore';
+const baseURl = 'http://localhost:3030/data';
 
 const getAll = () => {
     return fetch(baseURl + '/pets')
@@ -10,7 +10,23 @@ const getOne = (petId) => {
         .then(res => res.json());
 }
 
+const create = async (petData, token) => {
+    let response = await fetch(baseURl + '/pets', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': token
+        },
+        body: JSON.stringify(petData)
+    });
+
+    let result = await response.json();
+
+    return result;
+};
+
 export {
     getAll,
-    getOne
+    getOne,
+    create
 }
