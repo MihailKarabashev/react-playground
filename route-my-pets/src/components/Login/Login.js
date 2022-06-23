@@ -17,14 +17,17 @@ const Login = () => {
         let email = formData.get('email');
         let password = formData.get('password');
 
-        authService.login({ email, password })
+        authService.login(email, password)
             .then(res => {
+                console.log(res);
                 login(res);
                 navigate('/dashboard');
+                console.log('navigate');
 
             }).catch(err => {
 
             });
+
 
 
     }

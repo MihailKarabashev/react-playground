@@ -1,28 +1,35 @@
 const baseURl = 'http://localhost:3030/data';
 
 const getAll = () => {
-    return fetch(baseURl + '/pets')
+    return fetch(baseURl + '/data')
         .then(res => res.json());
 }
 
 const getOne = (petId) => {
-    return fetch(baseURl + '/pets/' + petId)
+    return fetch(baseURl + '/data/' + petId)
         .then(res => res.json());
 }
 
 const create = async (petData, token) => {
-    let response = await fetch(baseURl + '/pets', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            'X-Authorization': token
-        },
-        body: JSON.stringify(petData)
-    });
+    try {
+        let response = await fetch(baseURl + '/data', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'X-Authorization': token
+            },
+            body: JSON.stringify(petData)
+        });
 
-    let result = await response.json();
+        let result = await response.json();
 
-    return result;
+        if (!result.ok) {
+            throw new Error(result);
+        }
+        return result;
+    } catch (error) {
+        alert(error.meesge);
+    }
 };
 
 export {

@@ -10,7 +10,7 @@ const Details = () => {
         getOne(petId).then(result => {
             setPet(result);
         });
-    })
+    }, []);
 
 
     return (

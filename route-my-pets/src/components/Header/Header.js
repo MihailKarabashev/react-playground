@@ -5,6 +5,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 const Header = () => {
     const { user } = useContext(AuthContext);
+
     let guestNavigation = (
         <div id="guest">
             <Link className="button" to="/login">Login</Link>
