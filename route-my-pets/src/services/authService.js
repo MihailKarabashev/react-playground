@@ -28,6 +28,22 @@ export const isAuthenticated = () => {
     return Boolean(getUser())
 };
 
-export const logout = () => {
-    fetch(baseUrl + '/users/logout');
+export const logout = (token) => {
+    return fetch(baseUrl + '/users/logout', {
+        method: 'GET',
+        headers: {
+            'X-Authorization': token
+        }
+    });
+};
+
+export const register = (email, password) => {
+    return fetch(baseUrl + '/users/register', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+    })
+        .then(res => res.json());
 };

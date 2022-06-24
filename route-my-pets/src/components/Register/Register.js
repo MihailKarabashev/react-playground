@@ -1,7 +1,38 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { register } from "../../services/authService";
+
+import { AuthContext } from "../../contexts/AuthContext";
+
 const Register = () => {
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const registerSubmitHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+
+        const email = formData.get('email');
+        const password = formData.get('password');
+        const repeatPass = formData.get('repeat-pass');
+
+
+        if (password != repeatPass) {
+        }
+
+        register(email, password)
+            .then(res => {
+                login(res);
+                navigate('/dashboard');
+            });
+
+
+    };
+
     return (
         <section id="register-page" className="register">
-            <form id="register-form" action="" method="">
+            <form id="register-form" method="POST" onSubmit={registerSubmitHandler}>
                 <fieldset>
                     <legend>Register Form</legend>
                     <p className="field">

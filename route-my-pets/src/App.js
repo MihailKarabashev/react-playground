@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext'
 
-import * as authService from './services/authService';
+import useLocalStorage from './hooks/useLocalStorage';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
@@ -12,23 +12,25 @@ import MyPets from './components/MyPets';
 import Create from './components/Create';
 import Details from './components/Details';
 
+const initialAuthState = {
+  _id: '',
+  accessToken: '',
+  email: '',
+};
+
 function App() {
-  const [user, setUser] = useState({
-    _id: '',
-    accessToken: '',
-    email: '',
-  });
+  const [user, setUser] = useLocalStorage('user', initialAuthState);
 
   const login = (authData) => {
     setUser(authData);
   }
 
-  const onLogout = () => {
-
+  const logout = () => {
+    setUser(initialAuthState);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       <div id="container">
         <Header />
 
@@ -36,7 +38,7 @@ function App() {
           <Routes>
             <Route path="/dashboard/*" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout onLogout={onLogout} />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
             <Route path="/my-pets" element={<MyPets />} />
             <Route path="/create" element={<Create />} />

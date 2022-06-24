@@ -23,7 +23,7 @@ const Create = () => {
         create(object, user.accessToken)
             .then(result => {
                 navigate('/dashboard');
-            })
+            });
     };
     return (
         <section id="create-page" className="create">

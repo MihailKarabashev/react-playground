@@ -7,9 +7,10 @@ const PetList = () => {
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
-        getAll().then(result => {
-            setPets(Object.values(result));
-        });
+        getAll()
+            .then(result => {
+                setPets(Object.values(result));
+            });
     }, []);
 
     return (
